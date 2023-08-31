@@ -8,25 +8,25 @@ import org.keycloak.models.KeycloakSessionFactory;
 
 public class CustomTermsAndConditionsFactory implements RequiredActionFactory {
 
-    private static final CustomTermsAndConditions SINGLETON = new CustomTermsAndConditions();
+
 
     @Override
     public String getDisplayText() {
-        return "Custom Terms and Conditions";
+        return "Send email expiry"; // Display name of your custom required action
     }
 
     @Override
-    public RequiredActionProvider create(KeycloakSession keycloakSession) {
-        return SINGLETON;
+    public RequiredActionProvider create(KeycloakSession session) {
+        return new CustomTermsAndConditions(session); // Return a new instance of your custom required action provider
     }
 
     @Override
-    public void init(Config.Scope scope) {
+    public void init(Config.Scope config) {
 
     }
 
     @Override
-    public void postInit(KeycloakSessionFactory keycloakSessionFactory) {
+    public void postInit(KeycloakSessionFactory factory) {
 
     }
 
@@ -37,6 +37,6 @@ public class CustomTermsAndConditionsFactory implements RequiredActionFactory {
 
     @Override
     public String getId() {
-        return CustomTermsAndConditions.PROVIDER_ID;
+        return "send_email_required_action";
     }
 }
